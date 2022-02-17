@@ -52,12 +52,12 @@ hc keybind $Mod-Shift-m spawn rofi -modi windowcd,window -show windowcd \
     -font "Droid 14"
 
 # increase/decrease gaps
-# window gaps
-hc keybind $Mod-minus spawn $config/herbstluftwm/changegaps.sh decrease window 2
-hc keybind $Mod-equal spawn $config/herbstluftwm/changegaps.sh increase window 2
 # frame gaps
-hc keybind $Mod-Shift-minus spawn $config/herbstluftwm/changegaps.sh decrease frame 2
-hc keybind $Mod-Shift-equal spawn $config/herbstluftwm/changegaps.sh increase frame 2
+hc keybind $Mod-minus spawn $config/herbstluftwm/changegaps.sh decrease frame 5
+hc keybind $Mod-equal spawn $config/herbstluftwm/changegaps.sh increase frame 5
+# window gaps
+hc keybind $Mod-Shift-minus spawn $config/herbstluftwm/changegaps.sh decrease window 5
+hc keybind $Mod-Shift-equal spawn $config/herbstluftwm/changegaps.sh increase window 5
 
 #######################################
 # basic window manipulation
@@ -84,6 +84,10 @@ hc keybind $Mod-h chain , split right 0.5 , focus right
 hc keybind $Mod-Shift-v chain , split bottom 0.5 , shift down
 hc keybind $Mod-Shift-h chain , split right 0.5 , shift right
 
+# mirror *across* x/y axis
+hc keybind $Mod-y mirror horizontal
+hc keybind $Mod-x mirror vertical
+
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space split explode
 
@@ -109,7 +113,7 @@ hc keybind $Mod-c cycle
 hc keybind $Mod-i jumpto urgent
 
 #######################################
-# tags				      #
+# tags
 #######################################
 tag_names=({1..5})
 tag_keys=({1..5})
@@ -158,13 +162,15 @@ hc attr settings.frame_border_width 0
 hc attr settings.frame_bg_transparent on
 hc attr settings.frame_gap 40
 
-hc attr settings.frame_border_active_color '#333333cc'
-hc attr settings.frame_border_normal_color '#171717cc'
+hc attr settings.frame_border_active_color '#134e2c'
+hc attr settings.frame_border_normal_color '#0b2e23'
+hc attr settings.frame_active_opacity 100
+hc attr settings.frame_normal_opacity 0
 
 # Title bar
-hc attr theme.title_height 20
+hc attr theme.title_height 0
 hc attr theme.title_font 'Droid:pixelsize=16'
-hc attr theme.padding_top 2 # space below the title's baseline (i.e. text depth)
+hc attr theme.padding_top 0 # space below the title's baseline (i.e. text depth)
 hc attr theme.active.title_color '#EEEEEE'
 hc attr theme.normal.title_color '#AAAAAA'
 
@@ -220,6 +226,9 @@ nitrogen --restore
 
 # compositor
 picom &
+
+# mic filters
+easyeffects --gapplication-service &
 
 # script to hide bar automatically polybar-hdmi_HDMI-1
 # sleep 1
